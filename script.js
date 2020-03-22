@@ -11,15 +11,20 @@ const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
 
 statusDisplay.innerHTML = currentPlayerTurn();
 
-function handleCellPlayed(clickedCell, clickedCellIndex){
-	
+function handleCellPlayed(clickedCell, clickedCellIndex){	
 	gameState[clickedCellIndex] = currentPlayer;
 	clickedCell.innerHTML = currentPlayer;
+	if(currentPlayer === "X"){
+		clickedCell.style.background="blue";
+	}
+	else{
+		clickedCell.style.background="red";
+	}
 }
 
 function handlePlayerChange(){
 	currentPlayer = currentPlayer === "X" ? "O" : "X";
-	statusDisplay. innerHTML = currentPlayerTurn();
+	statusDisplay.innerHTML = currentPlayerTurn();
 }
 const winningConditions = [
     [0, 1, 2],
@@ -81,6 +86,7 @@ function handleRestartGame(){
 	gameState = ["", "", "", "", "", "", "", "", ""];
 	statusDisplay.innerHTML = currentPlayerTurn();
 	document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
+	document.querySelectorAll('.cell').forEach(cell => cell.style.background="");
 }
 
 document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
